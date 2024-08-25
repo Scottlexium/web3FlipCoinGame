@@ -101,14 +101,20 @@ export default function Home() {
 
   return (
     <main className="flex items-center justify-center min-h-screen h-full w-full relative px-2 sm:px-20 pb-40">
-      <div className="absolute top-20 font-jersey text-3xl mb-20 text-center">
-        <p>{flipping ? "Flipping..." : flipOutcome}</p>
-        <p>{`You ${
-          flipOutcome.toLowerCase() === predictedOutcome?.toLowerCase()
-            ? "win 🤩"
-            : "lose 😢"
-        }`}</p>
-      </div>
+      {flipping ? (
+        <div className="absolute top-20 font-jersey text-3xl mb-20 text-center">
+          <p>Flipping...</p>
+        </div>
+      ) : (
+        <div className="absolute top-20 font-jersey text-3xl mb-20 text-center">
+          <p>{flipOutcome}</p>
+          <p>{`You ${
+            flipOutcome.toLowerCase() === predictedOutcome?.toLowerCase()
+              ? "win 🤩"
+              : "lose 😢"
+          }`}</p>
+        </div>
+      )}
       <div className="relative grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 w-full h-full mt-40 md:mt-0">
         <div className="bg-theme-neptune w-full col-span-1 py-10 px-5 rounded-lg space-y-5 order-2 md:order-1 mt-40">
           <label
