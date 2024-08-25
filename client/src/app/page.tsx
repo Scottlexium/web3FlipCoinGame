@@ -41,7 +41,7 @@ export default function Home() {
   const { chain } = useAccount();
 
   const coinFlipRef = useRef<CoinFlipRef>(null);
-  const [flipOutcome, setFlipOutcome] = useState("");
+  const [flipOutcome, setFlipOutcome] = useState<Outcome | null>(null);
   const [flipping, setFlipping] = useState(false);
   const [predictedOutcome, setPredictedOutcome] = useState<Outcome | null>(
     Outcome.HEADS
@@ -95,7 +95,7 @@ export default function Home() {
   };
 
   const onFlipResult = (result: string) => {
-    setFlipOutcome(result);
+    setFlipOutcome(result as Outcome | null);
     setFlipping(false);
   };
 
@@ -108,11 +108,13 @@ export default function Home() {
       ) : (
         <div className="absolute top-20 font-jersey text-3xl mb-20 text-center">
           <p>{flipOutcome}</p>
-          <p>{`You ${
-            flipOutcome.toLowerCase() === predictedOutcome?.toLowerCase()
-              ? "win 🤩"
-              : "lose 😢"
-          }`}</p>
+          {flipOutcome !== null && (
+            <p>{`You ${
+              flipOutcome.toLowerCase() === predictedOutcome?.toLowerCase()
+                ? "win 🤩"
+                : "lose 😢"
+            }`}</p>
+          )}
         </div>
       )}
       <div className="relative grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 w-full h-full mt-40 md:mt-0">
