@@ -1,0 +1,28 @@
+{
+  "type": "commonjs",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "@openzeppelin/hardhat-upgrades": "^3.2.1",
+    "hardhat": "^2.22.9"
+  },
+  "scripts": {
+    "deploy": "npx hardhat run scripts/deploy.js --network polygonAmoy",
+    "test": "npx hardhat test",
+    "compile": "npx hardhat compile",
+    "node": "npx hardhat node",
+    "verify": "npx hardhat verify --network polygonAmoy 0x9DD2Be9c7aC956a6d7581c556F32a4b3CaB556D5 '100'",
+    "ignition": "npx hardhat ignition deploy ignition/modules/CoinFlipGame.ts --network polygonAmoy"
+  },
+  "dependencies": {
+    "@nomicfoundation/hardhat-ignition": "^0.15.5",
+    "@nomicfoundation/hardhat-verify": "^2.0.9",
+    "@openzeppelin/contracts": "^5.0.2",
+    "@solana/web3.js": "^1.95.3",
+    "bip32": "^4.0.0",
+    "bitcoinjs-lib": "^6.1.6",
+    "dotenv": "^16.4.5",
+    "ecpair": "^2.1.0",
+    "ethers": "^6.13.2",
+    "web3": "^4.12.1"
+  }
+}
