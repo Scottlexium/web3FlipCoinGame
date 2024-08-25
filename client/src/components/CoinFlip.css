@@ -1,0 +1,155 @@
+.purse {
+    height: 160px;
+    width: 160px;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    margin-top: -80px;
+    margin-left: -80px;
+    -webkit-perspective: 1000;
+    -webkit-box-reflect: below 0 linear-gradient(hsla(0, 0%, 100%, 0), hsla(0, 0%, 100%, 0) 45%, hsla(0, 0%, 100%, 0.2));
+    -webkit-filter: saturate(1.45) hue-rotate(2deg);
+  }
+  
+  .coin {
+    height: 160px;
+    width: 160px;
+    position: absolute;
+    transform-style: preserve-3d;
+    transform-origin: 50%;
+    
+  }
+  
+  .coin.flipping {
+    animation: spin 2s infinite linear;
+  }
+  
+  .coin .front,
+  .coin .back {
+    position: absolute;
+    height: 160px;
+    width: 160px;
+    border-radius: 50%;
+    background-size: cover;
+  }
+  
+  .coin .front {
+    transform: translateZ(8px);
+    background-image: url("https://res.cloudinary.com/lexium-enterprise/image/upload/v1724584835/coins/heads.jpg");
+  }
+  
+  .coin .back {
+    transform: translateZ(-8px) rotateY(180deg);
+    background-image: url("https://res.cloudinary.com/lexium-enterprise/image/upload/v1724584839/coins/tails.jpg");
+  }
+  
+  .coin .side {
+    transform: translateX(72px);
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+  }
+  
+  /* Spokes styles here */
+  .coin .side .spoke {
+    height: 160px;
+    width: 16px;
+    position: absolute;
+    -webkit-transform-style: preserve-3d;
+    -webkit-backface-visibility: hidden;
+  }
+  .coin .side .spoke:before,
+  .coin .side .spoke:after {
+    content: '';
+    display: block;
+    height: 15.68274245px;
+    width: 16px;
+    position: absolute;
+    -webkit-transform: rotateX(84.375deg);
+    background: hsl(42, 52%, 68%);
+    background: linear-gradient(to bottom, hsl(42, 60%, 75%) 0%, hsl(42, 60%, 75%) 74%, hsl(42, 40%, 60%) 75%, hsl(42, 40%, 60%) 100%);
+    background-size: 100% 3.48505388px;
+  }
+  .coin .side .spoke:before {
+    -webkit-transform-origin: top center;
+  }
+  .coin .side .spoke:after {
+    bottom: 0;
+    -webkit-transform-origin: center bottom;
+  }
+  .coin .side .spoke:nth-child(16) {
+    -webkit-transform: rotateY(90deg) rotateX(180deg);
+  }
+  .coin .side .spoke:nth-child(15) {
+    -webkit-transform: rotateY(90deg) rotateX(168.75deg);
+  }
+  .coin .side .spoke:nth-child(14) {
+    -webkit-transform: rotateY(90deg) rotateX(157.5deg);
+  }
+  .coin .side .spoke:nth-child(13) {
+    -webkit-transform: rotateY(90deg) rotateX(146.25deg);
+  }
+  .coin .side .spoke:nth-child(12) {
+    -webkit-transform: rotateY(90deg) rotateX(135deg);
+  }
+  .coin .side .spoke:nth-child(11) {
+    -webkit-transform: rotateY(90deg) rotateX(123.75deg);
+  }
+  .coin .side .spoke:nth-child(10) {
+    -webkit-transform: rotateY(90deg) rotateX(112.5deg);
+  }
+  .coin .side .spoke:nth-child(9) {
+    -webkit-transform: rotateY(90deg) rotateX(101.25deg);
+  }
+  .coin .side .spoke:nth-child(8) {
+    -webkit-transform: rotateY(90deg) rotateX(90deg);
+  }
+  .coin .side .spoke:nth-child(7) {
+    -webkit-transform: rotateY(90deg) rotateX(78.75deg);
+  }
+  .coin .side .spoke:nth-child(6) {
+    -webkit-transform: rotateY(90deg) rotateX(67.5deg);
+  }
+  .coin .side .spoke:nth-child(5) {
+    -webkit-transform: rotateY(90deg) rotateX(56.25deg);
+  }
+  .coin .side .spoke:nth-child(4) {
+    -webkit-transform: rotateY(90deg) rotateX(45deg);
+  }
+  .coin .side .spoke:nth-child(3) {
+    -webkit-transform: rotateY(90deg) rotateX(33.75deg);
+  }
+  .coin .side .spoke:nth-child(2) {
+    -webkit-transform: rotateY(90deg) rotateX(22.5deg);
+  }
+  .coin .side .spoke:nth-child(1) {
+    -webkit-transform: rotateY(90deg) rotateX(11.25deg);
+  }
+  .coin.skeleton .front,
+  .coin.skeleton .back {
+    display: none;
+  }
+  .coin.skeleton .side,
+  .coin.skeleton .side .spoke,
+  .coin.skeleton .side .spoke:before,
+  .coin.skeleton .side .spoke:after {
+    -webkit-backface-visibility: visible;
+  }
+  .coin.skeleton .side .spoke {
+    background: rgba(170, 170, 170, 0.1);
+  }
+  .coin.skeleton .side .spoke:before {
+    background: rgba(255, 170, 170, 0.2);
+  }
+  .coin.skeleton .side .spoke:after {
+    background: rgba(204, 204, 255, 0.2);
+  }
+  
+  @keyframes spin {
+    from {
+      transform: rotateY(0deg);
+    }
+    to {
+      transform: rotateY(360deg);
+    }
+  }
+  
