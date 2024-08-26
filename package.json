@@ -6,12 +6,12 @@
     "hardhat": "^2.22.9"
   },
   "scripts": {
-    "deploy": "npx hardhat run scripts/deploy.js --network polygonAmoy",
+    "deploy": "npx hardhat run scripts/deploy.js --network holesky",
     "test": "npx hardhat test",
     "compile": "npx hardhat compile",
     "node": "npx hardhat node",
-    "verify": "npx hardhat verify --network polygonAmoy 0x9DD2Be9c7aC956a6d7581c556F32a4b3CaB556D5 '100'",
-    "ignition": "npx hardhat ignition deploy ignition/modules/CoinFlipGame.ts --network polygonAmoy"
+    "verify": "npx hardhat verify --network holesky 0x9DD2Be9c7aC956a6d7581c556F32a4b3CaB556D5 '100'",
+    "ignition": "npx hardhat ignition deploy ignition/modules/CoinFlipGame.ts --network holesky"
   },
   "dependencies": {
     "@nomicfoundation/hardhat-ignition": "^0.15.5",

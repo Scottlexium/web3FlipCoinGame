@@ -6,6 +6,7 @@ require("@nomicfoundation/hardhat-verify");
 const { vars } = require("hardhat/config");
 
 const oklinkKey = vars.get("OKLINK_API_KEY");
+const holeskyKey = vars.get("HOLESKY_API_KEY");
 /** @type import('hardhat/config').HardhatUserConfig */
 
 module.exports = {
@@ -17,7 +18,8 @@ module.exports = {
   etherscan: {
     apiKey: {
       // neonevm: "test"
-      polygonAmoy: oklinkKey
+      polygonAmoy: oklinkKey,
+      holesky: holeskyKey
     },
     customChains: [
       {
@@ -43,6 +45,14 @@ module.exports = {
           apiURL: "https://www.oklink.com/api/explorer/v1/contract/verify/async/api/polygonAmoy",
           browserURL: "https://www.oklink.com/amoy"
         }
+      },
+      {
+        network: "holesky",
+        chainId: 17000,
+        urls: {
+          apiURL: "https://api-holesky.etherscan.io/api",
+          browserURL: "https://holesky.etherscan.io"
+        }
       }
     ]
   },
@@ -59,7 +69,11 @@ module.exports = {
     },
     // polygonAmoy
     polygonAmoy: {
-      url: process.env.POLYGON_AMOY_URL,
+      url: process.env.ETHEREUM_HOLESKY_URL,
+      accounts: [process.env.PRIVATE_KEY],
+    },
+    holesky: {
+      url: process.env.ETHEREUM_HOLESKY_URL,
       accounts: [process.env.PRIVATE_KEY],
     },
   }

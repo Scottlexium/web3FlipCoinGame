@@ -2,7 +2,7 @@
 import React, { useMemo, useState, useEffect, useRef, useReducer } from "react";
 import CoinFlip, { CoinFlipRef } from "@/components/CoinFlip";
 import { Gem, Plus, Minus, BringToFront, SendToBack } from "lucide-react";
-import { ethers } from "ethers";
+import * as ethers from "ethers";
 import { contractABI } from "@/AddressABI/contractABI";
 import { useWalletInfo } from "@web3modal/wagmi/react";
 import { useAccount } from "wagmi";
@@ -97,6 +97,94 @@ export default function Home() {
   const onFlipResult = (result: string) => {
     setFlipOutcome(result as Outcome | null);
     setFlipping(false);
+  };
+  const connectContract = async () => {
+    try {
+      if (typeof window.ethereum !== "undefined") {
+        // Request account access
+        await window.ethereum.request({ method: "eth_requestAccounts" });
+
+        // Create a Web3Provider using window.ethereum
+        // const provider = new ethers.BrowserProvider(window.ethereum);
+        const provider = new ethers.JsonRpcProvider(
+          "https://ethereum-holesky-rpc.publicnode.com"
+        );
+
+        // Get the signer
+        const signer = await provider.getSigner();
+
+        // Create the contract instance with the signer
+        const contract = new ethers.Contract(
+          contractAddress,
+          contractABI,
+          signer
+        );
+
+        // Reading example (view function)
+        const authorName = await contract.author();
+        console.log("Author:", authorName);
+
+        return contract; // You might want to return the contract instance for further use
+      } else {
+        console.log("Please install MetaMask!");
+      }
+      // if (typeof window.ethereum !== "undefined") {
+      //   try {
+      //     // Request account access
+      //     await window.ethereum.request({ method: "eth_requestAccounts" });
+      //     const provider = new ethers.JsonRpcProvider(
+      //       "https://polygon-amoy-bor-rpc.publicnode.com"
+      //     );
+      //     const contract = new ethers.Contract(
+      //       contractAddress,
+      //       contractABI,
+      //       provider
+      //     );
+      //     const myData = await contract.author();
+      //     console.log("Author:", myData);
+      //   } catch (error) {
+      //     console.error("Error connecting to contract:", error);
+      //   }
+      // } else {
+      //   console.log("Please install MetaMask!");
+      // }
+    } catch (error) {
+      console.error("Error connecting to contract", error);
+    }
+  };
+  useEffect(() => {
+    connectContract();
+  }, []);
+
+  const handleBet = async () => {
+    // Writing example (transaction function)
+    // For example, to place a bet (adjust parameters as needed)
+    const betAmount = ethers.parseEther("0.1"); // Betting 0.1 ETH
+    const betChoice = 0; // Assuming 0 for heads, 1 for tails
+
+    try {
+      if (window.ethereum) {
+        const provider = new ethers.AlchemyProvider(window.ethereum);
+        const signer = await provider.getSigner();
+        const contract = new ethers.Contract(
+          contractAddress,
+          contractABI,
+          signer
+        );
+        const tx = await contract.placeBet(betChoice, {
+          value: betAmount,
+        });
+        console.log("Transaction sent:", tx.hash);
+        const receipt = await tx.wait();
+        console.log("Transaction confirmed in block:", receipt.blockNumber);
+      } else {
+        console.log("Ethereum object not found, install Metamask.");
+      }
+
+      // Wait for the transaction to be mined
+    } catch (error) {
+      console.error("Error placing bet:", error);
+    }
   };
 
   return (

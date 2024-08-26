@@ -7,6 +7,7 @@ import {
   neonDevnet,
   opBNBTestnet,
   polygonAmoy,
+  holesky,
   // solana
 } from "wagmi/chains";
 
@@ -29,6 +30,7 @@ const chains = [
   sepolia,
   polygonAmoy,
   opBNBTestnet,
+  holesky,
 ] as const;
 export const config = defaultWagmiConfig({
   chains,
