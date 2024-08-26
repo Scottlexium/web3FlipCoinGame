@@ -117,7 +117,11 @@ export default function Home() {
           )}
         </div>
       )}
-      <div className="relative grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 w-full h-full mt-40 md:mt-0">
+      <div
+        className={`relative grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 w-full h-full md:mt-0 ${
+          flipOutcome !== null ? "mt-72" : "mt-40"
+        }`}
+      >
         <div className="bg-theme-neptune w-full col-span-1 py-10 px-5 rounded-lg space-y-5 order-2 md:order-1 mt-40">
           <label
             htmlFor=""
